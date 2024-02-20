@@ -3,7 +3,9 @@
 
 #include <stdio.h>
 
-typedef int Element;
+#define ERROR_CODE '\0'
+
+typedef char Element;
 
 void print_element(Element);
 

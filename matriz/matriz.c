@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matriz.h"
+#include <stdbool.h>
 
 struct Matriz {
   int **array;
@@ -8,7 +9,19 @@ struct Matriz {
   int cols;
 };
 
+bool is_valid_coords(Matriz* matriz, int row, int col) {
+  return row >= 0 && row < matriz->rows && col >= 0 && col < matriz->cols;
+}
+
+bool is_valid_size(int size) {
+  return size > 0;
+}
+
 Matriz* matriz_create(int rows, int cols) {
+  if (!is_valid_size(rows) || !is_valid_size(cols)) {
+    return NULL;
+  }
+
   Matriz* matriz = malloc(sizeof(Matriz));
 
   matriz->array = malloc(sizeof(int*) * rows);
@@ -39,10 +52,16 @@ void matriz_print(Matriz* matriz) {
 }
 
 int matriz_get(Matriz* matriz, int row, int col) {
+  if (!is_valid_coords(matriz, row, col)) {
+    return ERROR_CODE;
+  }
   return matriz->array[row][col];
 }
 
 void matriz_set(Matriz* matriz, int row, int col, int value) {
+  if (!is_valid_coords(matriz, row, col)) {
+    return;
+  }
   matriz->array[row][col] = value;
 }
 

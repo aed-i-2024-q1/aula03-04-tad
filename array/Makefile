@@ -16,3 +16,6 @@ encapsulation_violation: array.o
 
 clean:
 	rm -rf build
+
+run: main
+	./build/main

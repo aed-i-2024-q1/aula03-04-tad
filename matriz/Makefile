@@ -9,3 +9,6 @@ main: build matriz
 
 clean:
 	rm -rf build
+
+run: main
+	./build/main
